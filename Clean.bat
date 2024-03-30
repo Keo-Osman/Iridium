@@ -5,7 +5,10 @@ set "extensions=.sln .vcxproj .vcxproj.filters .vcxproj.user .csproj .ninja .nin
 
 for %%E in (%extensions%) do (
     for /r %%F in (*) do (
-        if /i not "%%~dpF"=="%CD%\vendor\" (
+        set "dir=%%~dpF"
+        if not "!dir:\vendor\=!"=="!dir!" (
+            rem Skip this file/directory as it's in the vendor directory
+        ) else (
             if /i "%%~xF"=="%%E" (
                 echo Deleting "%%F"
                 del "%%F" /f /q
@@ -29,7 +32,10 @@ if exist ".vscode" (
 echo Deleting Makefiles...
 
 for /r %%F in (Makefile*) do (
-    if /i not "%%~dpF"=="%CD%\vendor\" (
+    set "dir=%%~dpF"
+    if not "!dir:\vendor\=!"=="!dir!" (
+        rem Skip this file/directory as it's in the vendor directory
+    ) else (
         echo Deleting "%%F"
         del "%%F" /f /q
     )
