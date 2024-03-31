@@ -7,7 +7,7 @@
 
 .vscode/
 bin/
-bin-obj/
+bin-int/
 
 Engine/vendor/VulkanSDK
 
