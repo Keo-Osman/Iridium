@@ -3,8 +3,8 @@ project "glfw"
     kind "StaticLib"
     language "C"
     
-    targetdir ("%{wks.location}/bin/%{cfg.buildcfg}/%{cfg.system}__%{cfg.architecture}/%{prj.name}")
-    objdir ("%{wks.location}/bin-int/%{cfg.buildcfg}/%{cfg.system}__%{cfg.architecture}/%{prj.name}")
+    targetdir ("%{wks.location}/bin/%{cfg.buildcfg}/%{cfg.architecture}__%{cfg.system}/%{prj.name}")
+    objdir ("%{wks.location}/bin-int/%{cfg.buildcfg}/%{cfg.architecture}__%{cfg.system}/%{prj.name}")
     
     buildoptions { " -pthread " }
     linkoptions { " -pthread " }

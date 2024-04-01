@@ -39,6 +39,7 @@ pub fn build(b: *std.Build) void {
     const bin_dir = std.fs.path.join(b.allocator, &[_][]const u8{
         root_dir,
         "bin",
+        modeToString(mode),
         cfg,
         project_name,
     }) catch unreachable;
