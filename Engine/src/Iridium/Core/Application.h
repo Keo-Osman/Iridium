@@ -11,7 +11,7 @@ namespace Ird {
 		bool IsRunning();
 		void Run();
 	private:
-		std::unique_ptr<Window> m_window;
+		Window* m_window;
 		bool m_running;
 	};
 

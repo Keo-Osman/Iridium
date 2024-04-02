@@ -11,6 +11,16 @@ namespace Ird {
 			// Handle window creation failure
 			glfwTerminate();
 		}
+
+		glfwSetWindowUserPointer(m_window, this);
+		glfwSetKeyCallback(m_window, [](GLFWwindow* window, int key, int scancode, int action, int mods)
+		{
+			//WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+
+			//this->HandleKeyEvent();
+		});
+		glfwMakeContextCurrent(m_window);
+
 		m_running = true;
 	}
 	WindowsOS_Window::~WindowsOS_Window() {

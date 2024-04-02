@@ -1,16 +1,13 @@
 #include "Log.h"
 #include <iostream>
 namespace Ird {
-
-
 	//---------CORE LOGGER USED IN ENGINE-----------------------------------
-	Logger* g_coreLogger;
+	Logger* g_coreLogger = nullptr;
 	//---------CORE LOGGER USED IN ENGINE-----------------------------------
 
 	//---------CLIENT LOGGER USED IN APPLICATIONS-----------------------------------
-	Logger* g_clientLogger;
+	Logger* g_clientLogger = nullptr;
 	//---------CLIENT LOGGER USED IN APPLICATIONS-----------------------------------
-
 	void Log::Init() {
 		g_coreLogger = new Logger("Core");
 		g_clientLogger = new Logger("LOLOL");

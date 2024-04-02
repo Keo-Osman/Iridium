@@ -1,14 +1,13 @@
 #include "Application.h"
-#include "Log.h"
+#include "Time.h"
 
 namespace Ird {
 	Application::Application(){
 		m_window = Window::IRDCreateWindow();
 		m_running = true;
-		Log::Init();
 	}
 	Application::~Application(){
-		Log::Shutdown();
+		delete m_window;
 	}
 	bool Application::IsRunning() {
 		return m_window->IsRunning();
@@ -16,9 +15,11 @@ namespace Ird {
 
 	void Application::Run() {
 		while (m_running) {
+			++TickCount;
 			m_window->OnUpdate();
 			m_running = m_window->IsRunning();
 		}
 	}
 
 }
+ 

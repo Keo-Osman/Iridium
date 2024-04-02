@@ -11,6 +11,9 @@ namespace Ird {
 		bool IsRunning() override;
 		unsigned int GetWidth() const override { return m_width; }
 		unsigned int GetHeight() const override { return m_height; }
+		void HandleKeyEvent(int key, int scancode, int action, int mods) const {
+			//Dispatch Event here
+		}
 	private:
 		GLFWwindow* m_window;
 		bool m_running;

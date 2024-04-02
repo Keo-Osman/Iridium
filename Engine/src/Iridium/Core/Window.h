@@ -11,7 +11,7 @@ namespace Ird {
 		virtual uint32_t GetWidth() const = 0;
 		virtual uint32_t GetHeight() const = 0;
 		virtual bool IsRunning() = 0;
-		static std::unique_ptr<Window> IRDCreateWindow();
+		static Window* IRDCreateWindow();
 		// Window attributes
 		//virtual void SetVSync(bool enabled) = 0;
 		//virtual bool IsVSync() const = 0;

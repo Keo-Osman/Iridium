@@ -1,5 +1,6 @@
 #pragma once
 #include <memory>
+#include <iostream>
 
 // This ignores all warnings raised inside External headers
 #pragma warning(push, 0)
@@ -13,6 +14,9 @@ namespace Ird {
 	public:
 		Logger(const std::string& title);
 		std::shared_ptr<spdlog::logger> logger;
+		void Test(){
+			std::cout << "Logger Test" <<std::endl;
+		}
 		
 	};
 	namespace Log {

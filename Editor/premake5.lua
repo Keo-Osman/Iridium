@@ -7,11 +7,6 @@ project "Editor"
     targetdir ("%{wks.location}/bin/%{cfg.buildcfg}/%{cfg.architecture}__%{cfg.system}/%{prj.name}")
     objdir ("%{wks.location}/bin-int/%{cfg.buildcfg}/%{cfg.architecture}__%{cfg.system}/%{prj.name}")
 
-
-
-    buildoptions { " -pthread " }
-    linkoptions { " -pthread " }
-
     libdirs {"%{wks.location}/bin/%{cfg.buildcfg}/%{cfg.architecture}__%{cfg.system}/ECS"}
 
     includedirs { 
