@@ -16,9 +16,9 @@ namespace Ird {
 
 		glfwSetKeyCallback(m_window, [](GLFWwindow* window, int key, int scancode, int action, int mode){
 			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
-            switch (action)
+            /*switch (action)
 			{
-				/*case GLFW_PRESS:
+				case GLFW_PRESS:
 				{
 					KeyPressedEvent event(key, 0);
 					data.EventCallback(event);
@@ -35,8 +35,8 @@ namespace Ird {
 					KeyPressedEvent event(key, true);
 					data.EventCallback(event);
 					break;
-				}*/
-			}
+				}
+			}*/
         });
 		glfwMakeContextCurrent(m_window);
 		m_running = true;

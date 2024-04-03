@@ -31,6 +31,16 @@ project "Engine"
         defines{
             "IRD_DIST"
         }
+
+    filter "configurations:Release"
+        defines{
+            "IRD_RELEASE"
+        }
+
+    filter "configurations:Debug"
+        defines{
+            "IRD_DEBUG"
+        }
     
     filter "system:windows"
         defines { "IRD_PLATFORM_WINDOWS"}
