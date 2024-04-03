@@ -8,29 +8,11 @@
 #include "spdlog/sinks/stdout_color_sinks.h"
 #pragma warning(pop)
 
+#pragma region goofy macro magic
+#define IRD_STRINGIFY(x) #x
+#define IRD_TOSTRING(x) IRD_STRINGIFY(x)
+#define IRD_AT __FILE__ ":" IRD_TOSTRING(__LINE__)
 
-namespace Ird {
-	class Logger {
-	public:
-		Logger(const std::string& title);
-		std::shared_ptr<spdlog::logger> logger;
-		void Test(){
-			std::cout << "Logger Test" <<std::endl;
-		}
-		
-	};
-	namespace Log {
-		void Init();
-		void Shutdown();
-	}
-	//---------CORE LOGGER USED IN ENGINE-----------------------------------
-	extern Logger* g_coreLogger;
-	//---------CORE LOGGER USED IN ENGINE-----------------------------------
-
-	//---------CLIENT LOGGER USED IN APPLICATIONS-----------------------------------
-	extern Logger* g_clientLogger;
-	//---------CLIENT LOGGER USED IN APPLICATIONS-----------------------------------
-}
 #ifdef IRD_DIST   
 #define IRD_CORE_TRACE(...)			
 #define IRD_CORE_WARN(...)			
@@ -58,3 +40,32 @@ namespace Ird {
 #define IRD_CRITICAL(...)		
 #define IRD_INFO(...)			
 #endif
+
+#ifdef IRD_DEBUG
+#define IRD_VERIFY(...)
+#endif
+#pragma endregion 
+namespace Ird {
+	class Logger {
+	public:
+		Logger(const std::string& title);
+		std::shared_ptr<spdlog::logger> logger;
+		void Test(){
+			std::cout << "Logger Test" <<std::endl;
+		}
+		
+	};
+	namespace Log {
+		void Init();
+		void Shutdown();
+	}
+	//---------CORE LOGGER USED IN ENGINE-----------------------------------
+	extern Logger* g_coreLogger;
+	//---------CORE LOGGER USED IN ENGINE-----------------------------------
+
+	//---------CLIENT LOGGER USED IN APPLICATIONS-----------------------------------
+	extern Logger* g_clientLogger;
+	//---------CLIENT LOGGER USED IN APPLICATIONS-----------------------------------
+
+	void Verify(bool condition);
+}

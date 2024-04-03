@@ -2,25 +2,43 @@
 
 namespace Ird {
 	
-	WindowsOS_Window::WindowsOS_Window(const std::string& title, uint32_t width, uint32_t height, bool vsync)
-		:m_title(title), m_width(width), m_height(height), m_vsync(vsync)
+	WindowsOS_Window::WindowsOS_Window(const WindowData& data)
+		:m_data(data)
 	{
 		glfwInit();
-		m_window = glfwCreateWindow(width, height, title.c_str(), nullptr, nullptr);
+		m_window = glfwCreateWindow(m_data.width, m_data.height, m_data.title.c_str(), nullptr, nullptr);
 		if(!m_window) {
 			// Handle window creation failure
 			glfwTerminate();
 		}
 
 		glfwSetWindowUserPointer(m_window, this);
-		glfwSetKeyCallback(m_window, [](GLFWwindow* window, int key, int scancode, int action, int mods)
-		{
-			//WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 
-			//this->HandleKeyEvent();
-		});
+		glfwSetKeyCallback(m_window, [](GLFWwindow* window, int key, int scancode, int action, int mode){
+			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+            switch (action)
+			{
+				/*case GLFW_PRESS:
+				{
+					KeyPressedEvent event(key, 0);
+					data.EventCallback(event);
+					break;
+				}
+				case GLFW_RELEASE:
+				{
+					KeyReleasedEvent event(key);
+					data.EventCallback(event);
+					break;
+				}
+				case GLFW_REPEAT:
+				{
+					KeyPressedEvent event(key, true);
+					data.EventCallback(event);
+					break;
+				}*/
+			}
+        });
 		glfwMakeContextCurrent(m_window);
-
 		m_running = true;
 	}
 	WindowsOS_Window::~WindowsOS_Window() {

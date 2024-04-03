@@ -22,5 +22,13 @@ namespace Ird {
 		logger = spdlog::stdout_color_mt(title);
 		logger->set_level(spdlog::level::trace);
 	}
+	void Verify(bool condition){
+		if(!condition){
+			std::string result = "Condition failed at ";
+			result += IRD_AT;
+			IRD_CORE_CRITICAL(result);
+			__debugbreak();
+		}
+	}
 }
 

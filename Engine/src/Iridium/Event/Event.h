@@ -22,6 +22,11 @@ namespace Ird{
     class Event{
     public:
         const EVENT_TYPE type;
+        //Which event the window originated from
+        const uint8_t windowID;
+        //Debug Event records exact tick it happened
+        #ifdef IRD_DEBUG
         const uint32_t tickHappened;
+        #endif
     };
 }
