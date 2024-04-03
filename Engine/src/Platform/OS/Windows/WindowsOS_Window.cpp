@@ -44,6 +44,7 @@ namespace Ird {
 	WindowsOS_Window::~WindowsOS_Window() {
 		glfwDestroyWindow(m_window);
 		glfwTerminate(); 
+		m_running = false;
 	}
 	void WindowsOS_Window::OnUpdate() {
 
