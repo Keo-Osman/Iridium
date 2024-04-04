@@ -1,4 +1,7 @@
 #include "WindowsOS_Window.h"
+#include "Iridium/Event/Event.h"
+#include "Iridium/Event/KeyEvent.h"
+#include "Iridium/Core/Log.h"
 
 namespace Ird {
 	
@@ -16,27 +19,29 @@ namespace Ird {
 
 		glfwSetKeyCallback(m_window, [](GLFWwindow* window, int key, int scancode, int action, int mode){
 			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
-            /*switch (action)
+            switch (action)
 			{
 				case GLFW_PRESS:
 				{
-					KeyPressedEvent event(key, 0);
-					data.EventCallback(event);
+					KeyPressedEvent event((KEY_CODE)(key), false);
+					int type = (int)event.GetEventType();
+					IRD_CORE_INFO("Keycode pressed was: {}", type);
+					EvQueue::AddEvent(&event);
 					break;
 				}
 				case GLFW_RELEASE:
 				{
-					KeyReleasedEvent event(key);
-					data.EventCallback(event);
+					KeyReleasedEvent event((KEY_CODE)(key));
+					EvQueue::AddEvent(&event);
 					break;
 				}
 				case GLFW_REPEAT:
 				{
-					KeyPressedEvent event(key, true);
-					data.EventCallback(event);
+					KeyPressedEvent event((KEY_CODE)(key), true);
+					EvQueue::AddEvent(&event);
 					break;
 				}
-			}*/
+			}
         });
 		glfwMakeContextCurrent(m_window);
 		m_running = true;

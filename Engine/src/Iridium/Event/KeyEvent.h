@@ -1,5 +1,7 @@
 #pragma once
-#include "Iridium/Event/Event.h"
+#include "Event.h"
+#include "EventDefines.h"
+
 namespace Ird{
     enum KEY_CODE : uint16_t{
 		// From glfw3.h
@@ -140,8 +142,17 @@ namespace Ird{
     public:
         KeyPressedEvent(const KEY_CODE keycode, bool isRepeat = false)
 			: KeyEvent(keycode), m_isRepeat(isRepeat) {};
-        _EVENT_CLASS_TYPE(EVENT_TYPE::KeyPressed)
+		_EVENT_CLASS_TYPE(EVENT_TYPE::KeyPressed);
+		_EVENT_CLASS_CATEGORY(EVENT_CATEGORY::EventCategoryInput | EVENT_CATEGORY::EventCategoryKeyboard);
     private:
 		bool m_isRepeat;
+    };
+
+	class KeyReleasedEvent : public KeyEvent{
+    public:
+        KeyReleasedEvent(const KEY_CODE keycode)
+			: KeyEvent(keycode) {};
+		_EVENT_CLASS_TYPE(EVENT_TYPE::KeyPressed);
+		_EVENT_CLASS_CATEGORY(EVENT_CATEGORY::EventCategoryInput | EVENT_CATEGORY::EventCategoryKeyboard);
     };
 }

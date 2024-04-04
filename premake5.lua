@@ -6,7 +6,7 @@ include "Dependencies.lua"
 workspace "Iridium"
     configurations { "Debug", "Release", "Dist" }
     architecture "x86_64"
-    --startproject "Editor"
+    startproject "Editor"
 
 
 group "Dependencies"

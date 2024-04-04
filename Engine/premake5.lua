@@ -43,8 +43,9 @@ project "Engine"
         }
     
     filter "system:windows"
+        --linkoptions { " /NODEFAULTLIB:library " }
         defines { "IRD_PLATFORM_WINDOWS"}
-        links { "user32", "gdi32", "shell32","ntdll", "msvcrt" }
+        links { "user32", "gdi32", "shell32","ntdll"}
 
     filter "system:linux"
         links { "X11", "pthread", "dl" }
