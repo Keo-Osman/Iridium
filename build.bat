@@ -1,9 +1,7 @@
 @echo off
 setlocal enabledelayedexpansion
 
-cd Engine/src/Iridium/ECS
-zig build install
-cd ../../../../
+call ZigBuild.bat
 
 set /p "COMPILER=What compiler would you like to use? (Clang (c) or GCC (g)): "
 
