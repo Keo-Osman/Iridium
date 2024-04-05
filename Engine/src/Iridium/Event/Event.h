@@ -1,8 +1,6 @@
 #pragma once
 #include "EventDefines.h"
-#include <stdint.h>
-#include <string>
-#include <deque>
+#include "irpch.h"
 namespace Ird{
 
     class Event{

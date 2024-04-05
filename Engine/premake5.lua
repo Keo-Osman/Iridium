@@ -20,7 +20,8 @@ project "Engine"
         "src/**.cpp",
         "src/**.h"
     }
-
+    pchheader "src/irpch.h"
+    pchsource "src/irpch.cpp"
     includedirs { 
         "src",
         "%{IncludeDir.glfw}",

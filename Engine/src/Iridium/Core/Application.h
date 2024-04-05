@@ -1,5 +1,5 @@
 #pragma once
-#include <iostream>
+#include "irpch.h"
 #include "Iridium/Core/Window.h"
 namespace Ird {
 

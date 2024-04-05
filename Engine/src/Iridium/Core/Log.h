@@ -1,6 +1,5 @@
 #pragma once
-#include <memory>
-#include <iostream>
+#include "irpch.h"
 
 // This ignores all warnings raised inside External headers
 #pragma warning(push, 0)

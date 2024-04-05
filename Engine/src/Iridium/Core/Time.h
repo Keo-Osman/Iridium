@@ -1,5 +1,5 @@
 #pragma once
-#include <stdint.h>
+#include "irpch.h"
 namespace Ird{
-    extern uint32_t TickCount;
+    extern u32 TickCount;
 }

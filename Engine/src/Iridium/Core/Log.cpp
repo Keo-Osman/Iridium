@@ -1,5 +1,4 @@
 #include "Log.h"
-#include <iostream>
 namespace Ird {
 	//---------CORE LOGGER USED IN ENGINE-----------------------------------
 	Logger* g_coreLogger = nullptr;

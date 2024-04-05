@@ -3,7 +3,7 @@
 #include "EventDefines.h"
 
 namespace Ird{
-    enum KEY_CODE : uint16_t{
+    enum KEY_CODE : u16{
 		// From glfw3.h
 		Space               = 32,
 		Apostrophe          = 39, /* ' */
