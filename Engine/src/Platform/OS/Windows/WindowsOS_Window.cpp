@@ -1,6 +1,5 @@
 #include "WindowsOS_Window.h"
 #include "Iridium/Event/Event.h"
-#include "Iridium/Event/KeyEvent.h"
 #include "Iridium/Core/Log.h"
 
 namespace Ird {
@@ -23,22 +22,20 @@ namespace Ird {
 			{
 				case GLFW_PRESS:
 				{
-					KeyPressedEvent event((KEY_CODE)(key), false);
-					int type = (int)event.GetEventType();
-					IRD_CORE_INFO("Keycode pressed was: {}", type);
-					EvQueue::AddEvent(&event);
+					Event::Queue::AddKeyPressEvent(key, false);
+					IRD_CORE_INFO("Keycode pressed was: {}", key);
 					break;
 				}
 				case GLFW_RELEASE:
 				{
-					KeyReleasedEvent event((KEY_CODE)(key));
-					EvQueue::AddEvent(&event);
+					Event::Queue::AddKeyReleaseEvent(key);
+					IRD_CORE_INFO("Keycode released was: {}", key);
 					break;
 				}
 				case GLFW_REPEAT:
 				{
-					KeyPressedEvent event((KEY_CODE)(key), true);
-					EvQueue::AddEvent(&event);
+					Event::Queue::AddKeyPressEvent(key, true);
+					IRD_CORE_INFO("Keycode repeated was: {}", key);
 					break;
 				}
 			}
