@@ -1,7 +1,5 @@
 #pragma once
-#include <memory>
-#include <vector>
-#include <string>
+#include "irpch.h"
 namespace Ird {
 	struct WindowData{
 		std::string title;

@@ -1,7 +1,8 @@
 #pragma once
+#include "irpch.h"
 #include "Iridium/Core/Window.h"
 #include "GLFW/glfw3.h"
-#include <string>
+
 namespace Ird {
 	class WindowsOS_Window : public Window {
 	public:
