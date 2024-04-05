@@ -29,6 +29,11 @@ if exist ".vscode" (
     rmdir ".vscode" /s /q
 )
 
+if exist "CMakeFiles" (
+    echo Deleting .vscode folder...
+    rmdir "CMakeFiles" /s /q
+)
+
 echo Deleting Makefiles...
 
 for /r %%F in (Makefile*) do (
