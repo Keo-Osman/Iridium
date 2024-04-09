@@ -50,7 +50,7 @@ namespace Ird {
 		m_running = false;
 	}
 	void WindowsOS_Window::OnUpdate() {
-
+		glfwPollEvents();
 	}
 
 	bool WindowsOS_Window::IsRunning() {
