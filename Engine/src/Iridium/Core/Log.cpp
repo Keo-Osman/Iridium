@@ -1,3 +1,4 @@
+#include "irpch.h"
 #include "Log.h"
 namespace Ird {
 	//---------CORE LOGGER USED IN ENGINE-----------------------------------

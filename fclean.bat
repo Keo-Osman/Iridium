@@ -24,9 +24,24 @@ if exist ".vs" (
     rmdir ".vs" /s /q
 )
 
+if exist ".vscode" (
+    echo Deleting .vscode folder...
+    rmdir ".vscode" /s /q
+)
+
 if exist "CMakeFiles" (
     echo Deleting .vscode folder...
     rmdir "CMakeFiles" /s /q
+)
+
+if exist "bin" (
+    echo Deleting .vscode folder...
+    rmdir "bin" /s /q
+)
+
+if exist "bin-int" (
+    echo Deleting .vscode folder...
+    rmdir "bin-int" /s /q
 )
 
 echo Deleting Makefiles...

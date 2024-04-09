@@ -2,6 +2,7 @@
 include "Dependencies.lua"
 project "Editor"
     kind "ConsoleApp"
+    staticruntime "on"
     language "C++"
     cppdialect "C++20"
     targetdir ("%{wks.location}/bin/%{cfg.buildcfg}/%{cfg.architecture}__%{cfg.system}/%{prj.name}")

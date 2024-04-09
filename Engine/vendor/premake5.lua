@@ -2,7 +2,7 @@ project "glfw"
 
     kind "StaticLib"
     language "C"
-    
+    staticruntime "on"
     targetdir ("%{wks.location}/bin/%{cfg.buildcfg}/%{cfg.architecture}__%{cfg.system}/%{prj.name}")
     objdir ("%{wks.location}/bin-int/%{cfg.buildcfg}/%{cfg.architecture}__%{cfg.system}/%{prj.name}")
     

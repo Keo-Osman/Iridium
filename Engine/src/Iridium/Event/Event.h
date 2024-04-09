@@ -1,28 +1,33 @@
 #pragma once
-#include "EventDefines.h"
 #include "irpch.h"
+#include "EventDefines.h"
 namespace Ird{
-    namespace Event{
-        struct KeyPressedEvent{
-            _EVENT_CLASS_TYPE(EVENT_TYPE::KeyPressed)
-            _EVENT_CLASS_CATEGORY(EVENT_CATEGORY::EventCategoryInput | EVENT_CATEGORY::EventCategoryKeyboard);
-            u16 m_keyCode = -1;
-            bool m_isRepeat = false;
-        };
-        struct KeyReleasedEvent{
-            _EVENT_CLASS_TYPE(EVENT_TYPE::KeyReleased)
-            _EVENT_CLASS_CATEGORY(EVENT_CATEGORY::EventCategoryInput | EVENT_CATEGORY::EventCategoryKeyboard);
-            u16 m_keyCode = -1;
-        };
-        union Event_Context{
-            Event_Context() : Empty(nullptr){}
-            void* Empty;
-            KeyPressedEvent m_keyPress;
-            KeyReleasedEvent m_keyRelease;
-        };
         class Event{
         public:
-            Event_Context data;
+            Event() :type(EVENT_TYPE::_None), category(EVENT_CATEGORY::_EventCategoryNone){}
+            Event(EVENT_TYPE ptype, EVENT_CATEGORY pcategory, u16 pkeycode) :type(ptype), category(pcategory) {
+                data.keyRelease.keyCode = pkeycode;
+                //exists = true;
+            }
+            Event(EVENT_TYPE ptype, EVENT_CATEGORY pcategory, u16 pkeycode, bool pisrepeat) :type(ptype), category(pcategory) {
+                data.keyPress.keyCode = pkeycode;
+                data.keyPress.isRepeat = pisrepeat;
+                //exists = true;
+            }
+            EVENT_TYPE type = EVENT_TYPE::_None;
+            EVENT_CATEGORY category;
+            //bool exists = false;
+            bool handled = false;
+            union 
+            {
+                struct {
+                    u16 keyCode;
+                } keyRelease;
+                struct {
+                    u16 keyCode;
+                    bool isRepeat;
+                } keyPress;
+            } data;
 
         };
 
@@ -33,7 +38,8 @@ namespace Ird{
             extern Event evQueue[SIZE];
             extern u8 head;
             extern u8 tail;
-            Event& GetNextEvent();
+            extern Event emptyEvent;
+            Event* GetNextEvent();
             void init();
             //Add Events
             void AddKeyPressEvent(u16 keycode, bool repeat);
@@ -43,5 +49,4 @@ namespace Ird{
             void Flush();
         }
 
-    }
 }

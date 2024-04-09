@@ -19,7 +19,3 @@
 #include <unordered_set>
 
 #include "Defines.h"
-//Platform stuff
-#ifdef IRD_PLATFORM_WINDOWS
-#include <Windows.h>
-#endif

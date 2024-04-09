@@ -2,7 +2,7 @@
 include "Dependencies.lua"
 
 project "Engine"
-
+    staticruntime "on"
     kind "StaticLib"
     language "C++"
     cppdialect "C++20"
@@ -20,8 +20,8 @@ project "Engine"
         "src/**.cpp",
         "src/**.h"
     }
-    pchheader "src/irpch.h"
-    pchsource "src/irpch.cpp"
+    pchheader "irpch.h"
+	pchsource "src/irpch.cpp"
     includedirs { 
         "src",
         "%{IncludeDir.glfw}",
