@@ -1,16 +1,13 @@
+#include "irpch.h"
 #include "Log.h"
-#include <iostream>
 namespace Ird {
-
-
 	//---------CORE LOGGER USED IN ENGINE-----------------------------------
-	Logger* g_coreLogger;
+	Logger* g_coreLogger = nullptr;
 	//---------CORE LOGGER USED IN ENGINE-----------------------------------
 
 	//---------CLIENT LOGGER USED IN APPLICATIONS-----------------------------------
-	Logger* g_clientLogger;
+	Logger* g_clientLogger = nullptr;
 	//---------CLIENT LOGGER USED IN APPLICATIONS-----------------------------------
-
 	void Log::Init() {
 		g_coreLogger = new Logger("Core");
 		g_clientLogger = new Logger("LOLOL");
@@ -24,6 +21,14 @@ namespace Ird {
 		spdlog::set_pattern("%^[%T] %n: %v%$");
 		logger = spdlog::stdout_color_mt(title);
 		logger->set_level(spdlog::level::trace);
+	}
+	void Verify(bool condition){
+		if(!condition){
+			std::string result = "Condition failed at ";
+			result += IRD_AT;
+			IRD_CORE_CRITICAL(result);
+			__debugbreak();
+		}
 	}
 }
 

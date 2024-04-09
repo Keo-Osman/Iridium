@@ -2,7 +2,7 @@ project "glfw"
 
     kind "StaticLib"
     language "C"
-    
+    staticruntime "on"
     targetdir ("%{wks.location}/bin/%{cfg.buildcfg}/%{cfg.architecture}__%{cfg.system}/%{prj.name}")
     objdir ("%{wks.location}/bin-int/%{cfg.buildcfg}/%{cfg.architecture}__%{cfg.system}/%{prj.name}")
     
@@ -10,8 +10,7 @@ project "glfw"
     linkoptions { " -pthread " }
 
 
-    files
-    {
+    files {
         "%{prj.name}/include/GLFW/glfw3.h",
         "%{prj.name}/include/GLFW/glfw3native.h",
         "%{prj.name}/src/internal.h",
@@ -42,8 +41,7 @@ project "glfw"
         systemversion "latest"
         staticruntime "On"
 
-        files
-        {
+        files {
             "%{prj.name}/src/x11_init.c",
             "%{prj.name}/src/x11_monitor.c",
             "%{prj.name}/src/x11_window.c",
@@ -56,8 +54,7 @@ project "glfw"
             "%{prj.name}/src/linux_joystick.c"
         }
 
-        defines
-        {
+        defines {
             "_GLFW_X11"
         
         }
@@ -82,8 +79,7 @@ project "glfw"
             "%{prj.name}/src/osmesa_context.c"
         }
 
-        defines 
-        { 
+        defines { 
             "_GLFW_WIN32",
             "_CRT_SECURE_NO_WARNINGS"
 

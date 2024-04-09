@@ -3,14 +3,10 @@ require "cmake"
 
 include "Dependencies.lua"
 
-buildoptions { " -pthread " }
-linkoptions { " -pthread " }
-
-
 workspace "Iridium"
     configurations { "Debug", "Release", "Dist" }
     architecture "x86_64"
-    --startproject "Editor"
+    startproject "Editor"
 
 
 group "Dependencies"

@@ -1,21 +1,53 @@
+#include "irpch.h"
 #include "WindowsOS_Window.h"
+#include "Iridium/Event/Event.h"
+#include "Iridium/Core/Log.h"
 
 namespace Ird {
 	
-	WindowsOS_Window::WindowsOS_Window(const std::string& title, uint32_t width, uint32_t height, bool vsync)
-		:m_title(title), m_width(width), m_height(height), m_vsync(vsync)
+	WindowsOS_Window::WindowsOS_Window(const WindowData& data)
+		:m_data(data)
 	{
 		glfwInit();
-		m_window = glfwCreateWindow(width, height, title.c_str(), nullptr, nullptr);
+		m_window = glfwCreateWindow(m_data.width, m_data.height, m_data.title.c_str(), nullptr, nullptr);
 		if(!m_window) {
 			// Handle window creation failure
 			glfwTerminate();
 		}
+
+		glfwSetWindowUserPointer(m_window, this);
+
+		glfwSetKeyCallback(m_window, [](GLFWwindow* window, int key, int scancode, int action, int mode){
+			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+            switch (action)
+			{
+				case GLFW_PRESS:
+				{
+					Queue::AddKeyPressEvent(key, false);
+					//IRD_CORE_INFO("Keycode pressed was: {}", key);
+					break;
+				}
+				case GLFW_RELEASE:
+				{
+					Queue::AddKeyReleaseEvent(key);
+					//IRD_CORE_INFO("Keycode released was: {}", key);
+					break;
+				}
+				case GLFW_REPEAT:
+				{
+					Queue::AddKeyPressEvent(key, true);
+					//IRD_CORE_INFO("Keycode repeated was: {}", key);
+					break;
+				}
+			}
+        });
+		glfwMakeContextCurrent(m_window);
 		m_running = true;
 	}
 	WindowsOS_Window::~WindowsOS_Window() {
 		glfwDestroyWindow(m_window);
 		glfwTerminate(); 
+		m_running = false;
 	}
 	void WindowsOS_Window::OnUpdate() {
 
