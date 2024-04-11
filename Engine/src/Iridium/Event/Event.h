@@ -5,14 +5,22 @@ namespace Ird{
         class Event{
         public:
             //Empty Initailize
-            Event() :type(EVENT_TYPE::None), category(EVENT_CATEGORY::None), handled(false){}
+            Event() = default;
 
+            //Window Close
+            Event(u16 ptype, u16 pcategory) :type(ptype), category(pcategory) {}
+             //Window Resize
+            Event(u16 ptype, u16 pcategory, u16 pwidth, u16 pheight) :type(ptype), category(pcategory) {
+                data.windowResize.width = pwidth;
+                data.windowResize.height = pheight;
+            }
             //Key Press
             Event(u16 ptype, u16 pcategory, u16 pkeycode, bool pisrepeat) :type(ptype), category(pcategory) {
                 data.keyPress.keyCode = pkeycode;
                 data.keyPress.isRepeat = pisrepeat;
             }
             //Key Release and Mouse Press/Release
+            //Will change this in futre probably
             Event(u16 ptype, u16 pcategory, u16 pcode) :type(ptype), category(pcategory) {
                 switch(ptype){
                     case EVENT_TYPE::KeyReleased:
@@ -59,6 +67,13 @@ namespace Ird{
                 struct {
                     u16 mouseCode;
                 } mouseButton;
+
+                //Window Events
+                struct{
+                    u16 width;
+                    u16 height;
+                } windowResize;
+
             } data;
         };
 
@@ -85,6 +100,9 @@ namespace Ird{
             void AddMouseReleaseEvent(u16 mousecode);
             void AddMouseMoveEvent(f32 x, f32 y);
             void AddMouseScrollEvent(f32 x, f32 y);
+            //Window
+            void AddWindowCloseEvent();
+            void AddWindowResizeEvent(u16 width, u16 height);
 
 
             //Debug function

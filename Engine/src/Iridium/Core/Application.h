@@ -1,6 +1,7 @@
 #pragma once
 #include "irpch.h"
 #include "Iridium/Core/Window.h"
+#include "Iridium/Event/Event.h"
 namespace Ird {
 
 	class Application
@@ -10,6 +11,7 @@ namespace Ird {
 		virtual ~Application();
 		bool IsRunning();
 		void Run();
+		void OnEvent(evQueue::Handle ev);
 	private:
 		Window* m_window;
 		bool m_running;

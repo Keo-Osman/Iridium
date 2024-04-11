@@ -17,6 +17,23 @@ namespace Ird {
 
 		glfwSetWindowUserPointer(m_window, this);
 
+		// Set GLFW callbacks
+		glfwSetWindowSizeCallback(m_window, [](GLFWwindow* window, int width, int height)
+		{
+			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+			data.width = width;
+			data.height = height;
+
+			evQueue::AddWindowResizeEvent(width, height);
+		});
+
+		glfwSetWindowCloseCallback(m_window, [](GLFWwindow* window)
+		{
+			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+			evQueue::AddWindowCloseEvent();
+		});
+
+
 		glfwSetKeyCallback(m_window, [](GLFWwindow* window, int key, int scancode, int action, int mode){
 			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
             switch (action)

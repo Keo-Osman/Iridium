@@ -33,6 +33,16 @@ namespace Ird{
         queue[tail] = Event(EVENT_TYPE::MouseScrolled, (EVENT_CATEGORY::Input | EVENT_CATEGORY::Mouse), x, y);
         tail = (tail + 1) % SIZE;
     }
+
+    void evQueue::AddWindowCloseEvent(){
+        queue[tail] = Event(EVENT_TYPE::WindowClosed, EVENT_CATEGORY::Application);
+        tail = (tail + 1) % SIZE;
+    }
+    void evQueue::AddWindowResizeEvent(u16 width, u16 height){
+        queue[tail] = Event(EVENT_TYPE::WindowResized, EVENT_CATEGORY::Application, width, height);
+        tail = (tail + 1) % SIZE;
+    }
+
     evQueue::Handle evQueue::GetNextEvents() {
         u8 retHead = head;
         u8 numOfEvents= 0;
