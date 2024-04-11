@@ -24,46 +24,46 @@ namespace Ird {
 		while (m_running) {
 			m_window->OnUpdate();
 			++TickCount;
-			Event* ev = Queue::GetNextEvent();
-			if (ev->type == _KeyReleased) {
-				IRD_CORE_INFO("Event key released with key code: {}", ev->data.keyRelease.keyCode);
-				Queue::ResetEvent(ev);
+			evQueue::Handle ev = evQueue::GetNextEvents();
+			for(int i = 0; i < ev.numOfEvents; i++){
+				IRD_CORE_INFO("Event with type: {}", evQueue::queue[ev.head].type);
+				switch(evQueue::queue[ev.head].type){
+
+				case EVENT_TYPE::KeyPressed:
+					IRD_CORE_INFO("Event key released with key code: {}", evQueue::queue[ev.head].data.keyRelease.keyCode);
+					evQueue::queue[ev.head].handled = true;
+					break;
+				case EVENT_TYPE::KeyReleased:
+					IRD_CORE_INFO("Event key pressed with key code: {}", evQueue::queue[ev.head].data.keyPress.keyCode);
+					evQueue::queue[ev.head].handled = true;
+					break;
+
+				case EVENT_TYPE::MouseButtonPressed:
+					IRD_CORE_INFO("Event mouse button pressed with key code: {}", evQueue::queue[ev.head].data.mouseButton.mouseCode);
+					evQueue::queue[ev.head].handled = true;
+					break;
+
+				case EVENT_TYPE::MouseButtonReleased:
+					IRD_CORE_INFO("Event mouse button released with key code: {}", evQueue::queue[ev.head].data.mouseButton.mouseCode);
+					evQueue::queue[ev.head].handled = true;
+					break;
+
+				case EVENT_TYPE::MouseMoved:
+					IRD_CORE_INFO("Event mouse moved to: {}, {}", evQueue::queue[ev.head].data.mousePos.x, evQueue::queue[ev.head].data.mousePos.y);
+					evQueue::queue[ev.head].handled = true;
+					break;
+
+				case EVENT_TYPE::MouseScrolled:
+					IRD_CORE_INFO("Event mouse scrolled with offest: {}, {}", evQueue::queue[ev.head].data.mousePos.x, evQueue::queue[ev.head].data.mousePos.y);
+					evQueue::queue[ev.head].handled = true;
+					break;
+
+				default:
+        			break;
+				}
+				ev.head++;
 			}
-			else if (ev->type == _KeyPressed) {
-				IRD_CORE_INFO("Event key pressed with key code: {}", ev->data.keyPress.keyCode);
-				Queue::ResetEvent(ev);
-			}
-			//IRD_CORE_INFO("Tail is currently: {}, and Head is: {} ", Queue::tail, Queue::head);
-			m_running = m_window->IsRunning();
 		}
-		/*while (m_running) {
-			++TickCount;
-			for (int j = 0; j < 100; j++) {
-				IRD_CORE_INFO("J is {}", j);
-				if (j % 3 == 0) {
-					Queue::AddKeyPressEvent(4, false);
-					IRD_CORE_INFO("Event added");
-				}
-				Event* ev = Queue::GetNextEvent();
-
-				for (int i = 0; i < 255; i++) {
-					std::cout << Queue::evQueue[i].type;
-				}
-				std::cout << "" << std::endl;
-
-				if (ev->type == _KeyReleased) {
-					IRD_CORE_INFO("Event key released with key code: {}", ev->data.keyRelease.keyCode);
-					Queue::ResetEvent(ev);
-				}
-				else if (ev->type == _KeyPressed) {
-					IRD_CORE_INFO("Event key pressed with key code: {}", ev->data.keyPress.keyCode);
-					Queue::ResetEvent(ev);
-				}
-				IRD_CORE_INFO("Tail is currently: {}, and Head is: {} ", Queue::tail, Queue::head);
-
-				std::cin.get();
-			}
-		}*/
 	}
 
 }

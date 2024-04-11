@@ -8,7 +8,7 @@ namespace Ird {
 	public:
 		WindowsOS_Window(const WindowData& data);
 		~WindowsOS_Window();
-		void OnUpdate() override;
+		bool OnUpdate() override;
 		bool IsRunning() override;
 		unsigned int GetWidth() const override { return m_data.width; }
 		unsigned int GetHeight() const override { return m_data.height; }
