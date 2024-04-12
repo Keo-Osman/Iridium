@@ -8,10 +8,11 @@
 #include <windows.h>
 
 namespace Ird {
+	Application* Application::s_instance = nullptr;
 	Application::Application(){
 		m_window = Window::IRDCreateWindow();
 		m_running = true;
-		//Queue::init();
+		s_instance = this;
 	}
 	Application::~Application(){
 		delete m_window;
@@ -69,7 +70,7 @@ namespace Ird {
 				OnEvent(ev);
 				ev.head++;
 			}
-			if (IsKeyDown(this, KEY_CODE::A)) {
+			if (IsKeyDown(KEY_CODE::A)) {
 				IRD_CORE_INFO("A is down");
 			}
 		}

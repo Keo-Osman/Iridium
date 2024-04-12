@@ -8,5 +8,5 @@
 #endif // IRD_WINDOW_GLFW
 
 namespace Ird {
-    bool IsKeyDown(Application* app, u16 keycode);
+    bool IsKeyDown(u16 keycode);
 }
