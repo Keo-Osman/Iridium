@@ -17,9 +17,6 @@ namespace Ird {
 	Application::~Application(){
 		delete m_window;
 	}
-	bool Application::IsRunning() {
-		return m_window->IsRunning();
-	}
 	void* Application::GetNativeWindow(){
 		return m_window->GetWindow();
 	}
@@ -63,7 +60,7 @@ namespace Ird {
 	}
 	void Application::Run() {	
 		while (m_running) {
-			m_window->OnUpdate();
+			m_running = m_window->OnUpdate();
 			++TickCount;
 			evQueue::Handle ev = evQueue::GetNextEvents();
 			for(int i = 0; i < ev.numOfEvents; i++){

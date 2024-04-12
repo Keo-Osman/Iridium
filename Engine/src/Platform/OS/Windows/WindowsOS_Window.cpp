@@ -90,19 +90,16 @@ namespace Ird {
 		});
 
 		glfwMakeContextCurrent(m_window);
-		m_running = true;
 	}
 	
 	WindowsOS_Window::~WindowsOS_Window() {
 		glfwDestroyWindow(m_window);
 		glfwTerminate(); 
-		m_running = false;
 	}
 	
 	bool WindowsOS_Window::OnUpdate() {
 		glfwPollEvents();
-		m_running = !glfwWindowShouldClose(m_window);
-		return m_running;
+		return !glfwWindowShouldClose(m_window);
 	}
 
 	

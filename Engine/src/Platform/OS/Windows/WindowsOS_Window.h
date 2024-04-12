@@ -9,13 +9,11 @@ namespace Ird {
 		WindowsOS_Window(const WindowData& data);
 		~WindowsOS_Window();
 		bool OnUpdate() override;
-		bool IsRunning() override { return m_running; }
 		unsigned int GetWidth() const override { return m_data.width; }
 		unsigned int GetHeight() const override { return m_data.height; }
 		void* GetWindow() const override { return m_window; }
 	private:
 		GLFWwindow* m_window;
-		bool m_running;
 		WindowData m_data;
 	};
 

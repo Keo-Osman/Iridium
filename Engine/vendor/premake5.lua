@@ -84,6 +84,7 @@ project "glfw"
             "_CRT_SECURE_NO_WARNINGS"
 
         }
+        links { "user32", "gdi32", "shell32", "ntdll" }
 
     filter "configurations:Debug"
         runtime "Debug"
@@ -92,4 +93,5 @@ project "glfw"
     filter "configurations:Release"
         runtime "Release"
         optimize "On"
+
 

@@ -19,9 +19,6 @@ namespace Ird {
 		virtual ~Window() = default;
 		//Will return true if app is still running false if it's not
 		virtual bool OnUpdate() = 0;
-		//Returns same as OnUpdate but doesn't update the window
-		virtual bool IsRunning() = 0;
-
 
 		virtual uint32_t GetWidth() const = 0;
 		virtual uint32_t GetHeight() const = 0;
