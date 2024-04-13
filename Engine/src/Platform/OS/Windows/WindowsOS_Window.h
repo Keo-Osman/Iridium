@@ -9,8 +9,8 @@ namespace Ird {
 		WindowsOS_Window(const WindowData& data);
 		~WindowsOS_Window();
 		bool OnUpdate() override;
-		unsigned int GetWidth() const override { return m_data.width; }
-		unsigned int GetHeight() const override { return m_data.height; }
+		u32 GetWidth() const override { return m_data.width; }
+		u32 GetHeight() const override { return m_data.height; }
 		void* GetWindow() const override { return m_window; }
 	private:
 		GLFWwindow* m_window;
