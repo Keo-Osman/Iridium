@@ -22,3 +22,6 @@ CMakeLists.txt
 CMakeCache.txt
 
 Engine/src/Iridium/ECS/zig-cache
+
+zig-cache
+Zig-builds

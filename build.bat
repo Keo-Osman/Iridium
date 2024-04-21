@@ -1,7 +1,7 @@
 @echo off
 setlocal enabledelayedexpansion
 
-call scripts/zigbuild.bat
+
 
 set /p "COMPILER=What compiler would you like to use? (Clang (c) or GCC (g)): "
 
