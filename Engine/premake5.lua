@@ -5,11 +5,11 @@ project "Engine"
     kind "StaticLib"
     language "C++"
     cppdialect "C++20"
-    targetdir ("%{wks.location}/bin/%{cfg.buildcfg}/%{cfg.architecture}__%{cfg.system}/%{prj.name}")
+    targetdir ("%{wks.location}/bin/%{cfg.buildcfg}/%{cfg.architecture}__%{cfg.system}")
     objdir ("%{wks.location}/bin-int/%{cfg.buildcfg}/%{cfg.architecture}__%{cfg.system}/%{prj.name}")
 
 
-    libdirs {"%{wks.location}/bin/%{cfg.buildcfg}/%{cfg.architecture}__%{cfg.system}/ECS"}
+    libdirs {"%{wks.location}/bin/%{cfg.buildcfg}/%{cfg.architecture}__%{cfg.system}"}
 
     links {
         "glfw",

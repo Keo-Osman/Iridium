@@ -1,12 +1,9 @@
 const std = @import("std");
 const utils = @import("build-utils.zig");
 const proj_location = "Engine/src/Iridium/ECS";
-
-pub fn build(b: *std.Build) void {
+pub fn build(b: *std.Build, target: std.Build.ResolvedTarget, mode: std.builtin.OptimizeMode) !*std.Build.Step.Compile {
     const project_name = "ECS";
-    const mode = b.standardOptimizeOption(.{});
-    const target = b.standardTargetOptions(.{});
-    const bin_dir = utils.getBinDir(project_name, b);
+    const bin_dir = utils.getBinDir(b, target, mode);
     const src_file = std.fs.path.join(b.allocator, &[_][]const u8{ proj_location, "ECS.zig" }) catch unreachable;
     const lib = b.addStaticLibrary(.{
         .name = project_name,
@@ -18,4 +15,5 @@ pub fn build(b: *std.Build) void {
     lib.addIncludePath(.{ .path = "src" });
     b.lib_dir = bin_dir;
     b.installArtifact(lib);
+    return lib;
 }
