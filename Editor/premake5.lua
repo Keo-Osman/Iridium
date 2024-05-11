@@ -1,5 +1,5 @@
--- editor/premake5.lua
 include "Dependencies.lua"
+
 project "Editor"
     kind "ConsoleApp"
     staticruntime "on"
@@ -14,12 +14,13 @@ project "Editor"
         "src",
         "%{wks.location}/Engine/src",
         "%{IncludeDir.spdlog}",
-        "%{IncludeDir.glfw}"
+        "%{IncludeDir.ImGui}"
     }
     links { 
         "Engine",
         "glfw",
-        "ECS"
+        "ECS",
+        "ImGui"
     }
     files {
         "src/**.cpp",

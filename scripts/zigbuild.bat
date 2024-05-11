@@ -1,3 +1,3 @@
 cd Engine/src/Iridium/ECS
-zig build install
+zig build install -Doptimize=%~1
 cd ../../../../

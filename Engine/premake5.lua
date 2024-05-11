@@ -1,4 +1,3 @@
--- engine/premake5.lua
 include "Dependencies.lua"
 
 project "Engine"
@@ -14,7 +13,8 @@ project "Engine"
 
     links {
         "glfw",
-        "ECS"
+        "ECS",
+        "ImGui"
     }
     files {
         "src/**.cpp",
@@ -25,7 +25,9 @@ project "Engine"
     includedirs { 
         "src",
         "%{IncludeDir.glfw}",
-        "%{IncludeDir.spdlog}"
+        "%{IncludeDir.spdlog}",
+        "%{IncludeDir.ImGui}",
+
     }
     
     filter "configurations:Dist"
@@ -45,7 +47,7 @@ project "Engine"
     
     filter "system:windows"
         --linkoptions { " /NODEFAULTLIB:library " }
-        defines { "IRD_PLATFORM_WINDOWS"}
+        defines { "IRD_PLATFORM_WINDOWS", "IRD_WINDOW_GLFW"}
         links { "user32", "gdi32", "shell32","ntdll"}
 
     filter "system:linux"

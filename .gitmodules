@@ -9,3 +9,7 @@
 	path = Engine/src/Iridium/Thread-Pool
 	url = https://github.com/Keo-Osman/Thread-Pool.git
 	branch = Dev-Stable
+[submodule "Engine/vendor/ImGui"]
+	path = Engine/vendor/ImGui
+	url = https://github.com/ocornut/imgui.git
+	branch = docking

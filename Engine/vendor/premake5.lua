@@ -1,15 +1,11 @@
 project "glfw"
-
     kind "StaticLib"
     language "C"
     staticruntime "on"
+    location "%{prj.name}"
     targetdir ("%{wks.location}/bin/%{cfg.buildcfg}/%{cfg.architecture}__%{cfg.system}/%{prj.name}")
     objdir ("%{wks.location}/bin-int/%{cfg.buildcfg}/%{cfg.architecture}__%{cfg.system}/%{prj.name}")
     
-    buildoptions { " -pthread " }
-    linkoptions { " -pthread " }
-
-
     files {
         "%{prj.name}/include/GLFW/glfw3.h",
         "%{prj.name}/include/GLFW/glfw3native.h",
@@ -28,7 +24,6 @@ project "glfw"
         "%{prj.name}/src/null_platform.h",
         "%{prj.name}/src/null_joystick.h",
         "%{prj.name}/src/null_init.c",
-
         "%{prj.name}/src/null_monitor.c",
         "%{prj.name}/src/null_window.c",
         "%{prj.name}/src/null_joystick.c",
@@ -84,6 +79,7 @@ project "glfw"
             "_CRT_SECURE_NO_WARNINGS"
 
         }
+        links { "user32", "gdi32", "shell32", "ntdll" }
 
     filter "configurations:Debug"
         runtime "Debug"
@@ -93,3 +89,46 @@ project "glfw"
         runtime "Release"
         optimize "On"
 
+
+
+
+project "ImGui"
+    kind "StaticLib"
+    language "C"
+    location "%{prj.name}"
+    targetdir ("%{wks.location}/bin/%{cfg.buildcfg}/%{cfg.architecture}__%{cfg.system}/%{prj.name}")
+    objdir ("%{wks.location}/bin-int/%{cfg.buildcfg}/%{cfg.architecture}__%{cfg.system}/%{prj.name}")
+    
+
+
+    files {
+		"%{prj.name}/imconfig.h",
+		"%{prj.name}/imgui.h",
+		"%{prj.name}/imgui.cpp",
+		"%{prj.name}/imgui_draw.cpp",
+		"%{prj.name}/imgui_internal.h",
+		"%{prj.name}/imgui_widgets.cpp",
+		"%{prj.name}/imstb_rectpack.h",
+		"%{prj.name}/imstb_textedit.h",
+		"%{prj.name}/imstb_truetype.h",
+		"%{prj.name}/imgui_demo.cpp"
+	}
+
+	filter "system:windows"
+		systemversion "latest"
+		cppdialect "C++20"
+		staticruntime "On"
+
+	filter "system:linux"
+		pic "On"
+		systemversion "latest"
+		cppdialect "C++20"
+		staticruntime "On"
+
+	filter "configurations:Debug"
+		runtime "Debug"
+		symbols "on"
+
+	filter "configurations:Release"
+		runtime "Release"
+		optimize "on"

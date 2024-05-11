@@ -1,56 +1,63 @@
 @echo off
-setlocal enabledelayedexpansion
 
-call ZigBuild.bat
+set CPPcompiler="clang++"
+set Ccompiler="clang"
+set build_system="make"
+set mode=release
+set zigmode=ReleaseFast
+REM Check if command line arguments are provided
+if "%~1" neq "" set build_system=%~1
+if "%~2" neq "" set compiler=%~2
+if "%~3" neq "" set mode=%~3
 
-set /p "COMPILER=What compiler would you like to use? (Clang (c) or GCC (g)): "
-
-set "COMPILER=!COMPILER:~0,1!"
-set "COMPILER=!COMPILER:l=L!"
-
-if "!COMPILER!"=="c" ( 
-    echo clang chosen
-) else if "!COMPILER!"=="g" ( 
-    echo gcc chosen
-) else (
-    echo Invalid input. Please enter 'c' for Clang or 'g' for GCC.
-    goto :EOF
+REM Check for compiler argument
+if "%compiler%"=="-c" (
+    set Ccompiler="clang"
+    set CPPcompiler="clang++"
+) else if "%compiler%"=="-g" (
+    set Ccompiler="gcc"
+    set CPPcompiler="g++"
+) else if "%compiler%"=="-z" (
+    set Ccompiler="zig cc"
+    set Ccompiler="zig c++"
 )
 
-set /p "BUILD_SYSTEM=What build system do you want to use? (Ninja (n) or Make (m)): "
-
-set "BUILD_SYSTEM=!BUILD_SYSTEM:~0,1!"
-set "BUILD_SYSTEM=!BUILD_SYSTEM:l=L!"
-
-if "!BUILD_SYSTEM!"=="n" ( 
-    echo ninja chosen
-) else if "!BUILD_SYSTEM!"=="m" ( 
-    echo make chosen
-) else (
-    echo Invalid input. Please enter 'n' for Ninja or 'm' for Make.
-    goto :EOF
+REM Check for build system argument
+if "%build_system%"=="-m" (
+    set build_system="make"
+) else if "%build_system%"=="-n" (
+    set build_system="ninja"
 )
 
-set /p "CONFIG=What Configuration do you want to build: "
+REM Check for mode argument
+if "%mode%"=="-d" (
+    set mode=debug
+    set zigmode=Debug
+) else if "%mode%"=="-r" (
+    set zigmode=ReleaseSafe
+    set mode=release
+) else if "%mode%"=="-di" (
+    set zigmode=ReleaseFast
+    set mode=dist
+)
 
-if "!COMPILER!"=="c" (
-    if "!BUILD_SYSTEM!"=="m" ( 
-        premake --cc=clang --os=windows gmake2
-        make -j32 config=!CONFIG!
+echo Build System: %build_system%
+echo Compiler: %ccompiler%
+echo Mode: %mode%
+
+call scripts/zigbuild.bat %zigmode%
+
+set condition=F
+if %Ccompiler%=="clang" set condition=T
+if %Ccompiler%=="gcc" set condition=T
+
+
+if %build_system%=="make" (
+    if condition==T (
+        premake --cc="%Ccompiler%" --os=windows gmake2
     ) else (
-        premake --cc=clang --os=windows cmake
-        cmake -GNinja -DCMAKE_BUILD_TYPE=!CONFIG! -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++
-        ninja
+        premake --os=windows gmake2
     )
-) else (
-    if "!BUILD_SYSTEM!"=="m" ( 
-        premake --cc=gcc --os=windows gmake2
-        make -j32 config=!CONFIG!
-    ) else (
-        premake --cc=gcc --os=windows cmake
-        cmake -GNinja -DCMAKE_BUILD_TYPE=!CONFIG! -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++
-        ninja
-    )
+    make -j64 config=%mode% CC=%Ccompiler% CXX=%CPPcompiler%
 )
 
-endlocal

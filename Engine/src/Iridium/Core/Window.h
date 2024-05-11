@@ -17,15 +17,17 @@ namespace Ird {
 	{
 	public:
 		virtual ~Window() = default;
+		//Will return true if app is still running false if it's not
+		virtual bool OnUpdate() = 0;
 
-		virtual void OnUpdate() = 0;
-
-		virtual uint32_t GetWidth() const = 0;
-		virtual uint32_t GetHeight() const = 0;
-		virtual bool IsRunning() = 0;
+		virtual u32 GetWidth() const = 0;
+		virtual u32 GetHeight() const = 0;
 		static Window* IRDCreateWindow();
+		virtual void* GetWindow() const = 0;
+
 		// Window attributes
 		//virtual void SetVSync(bool enabled) = 0;
-		//virtual bool IsVSync() const = 0;
+		//virtual bool IsVSync() ;
 	};
+
 }
