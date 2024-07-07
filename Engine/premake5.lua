@@ -9,12 +9,16 @@ project "Engine"
     objdir ("%{wks.location}/bin-int/%{cfg.buildcfg}/%{cfg.architecture}__%{cfg.system}/%{prj.name}")
 
 
-    libdirs {"%{wks.location}/bin/%{cfg.buildcfg}/%{cfg.architecture}__%{cfg.system}/ECS"}
+    libdirs {
+        "%{wks.location}/bin/%{cfg.buildcfg}/%{cfg.architecture}__%{cfg.system}/ECS",
+        "%{wks.location}/Engine/vendor/VulkanSDK/Lib"
+    }
 
     links {
         "glfw",
         "ECS",
-        "ImGui"
+        "ImGui",
+        "vulkan-1"
     }
     files {
         "src/**.cpp",
@@ -27,7 +31,7 @@ project "Engine"
         "%{IncludeDir.glfw}",
         "%{IncludeDir.spdlog}",
         "%{IncludeDir.ImGui}",
-
+        "%{IncludeDir.Vulkan}"
     }
     
     filter "configurations:Dist"

@@ -8,7 +8,10 @@ project "Editor"
     targetdir ("%{wks.location}/bin/%{cfg.buildcfg}/%{cfg.architecture}__%{cfg.system}/%{prj.name}")
     objdir ("%{wks.location}/bin-int/%{cfg.buildcfg}/%{cfg.architecture}__%{cfg.system}/%{prj.name}")
 
-    libdirs {"%{wks.location}/bin/%{cfg.buildcfg}/%{cfg.architecture}__%{cfg.system}/ECS"}
+    libdirs {
+        "%{wks.location}/bin/%{cfg.buildcfg}/%{cfg.architecture}__%{cfg.system}/ECS",
+        "%{wks.location}/Engine/vendor/VulkanSDK/Lib"
+    }
 
     includedirs { 
         "src",
@@ -20,7 +23,8 @@ project "Editor"
         "Engine",
         "glfw",
         "ECS",
-        "ImGui"
+        "ImGui",
+        "vulkan-1"
     }
     files {
         "src/**.cpp",

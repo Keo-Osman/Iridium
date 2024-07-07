@@ -16,7 +16,7 @@ Engine/vendor/VulkanSDK
 .ninja_log
 
 **.cmake
-Makefile
+**Makefile
 CMakeFiles/
 CMakeLists.txt
 CMakeCache.txt

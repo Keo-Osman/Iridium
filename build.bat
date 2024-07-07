@@ -4,7 +4,7 @@ set CPPcompiler="clang++"
 set Ccompiler="clang"
 set build_system="make"
 set mode=release
-set zigmode=ReleaseFast
+set zigmode=ReleaseSafe
 REM Check if command line arguments are provided
 if "%~1" neq "" set build_system=%~1
 if "%~2" neq "" set compiler=%~2
