@@ -17,6 +17,13 @@ Engine/vendor/VulkanSDK
 
 **.cmake
 **Makefile
+Engine/vendor/ImGui/**Makefile
+Engine/vendor/ImGui/.Makefile
+Engine/vendor/ImGui/Makefile
+Engine/vendor/ImGui/*.make
+
+
+
 CMakeFiles/
 CMakeLists.txt
 CMakeCache.txt
