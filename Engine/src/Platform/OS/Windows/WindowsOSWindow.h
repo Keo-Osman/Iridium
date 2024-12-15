@@ -4,13 +4,13 @@
 #include "GLFW/glfw3.h"
 
 namespace Ird {
-	class WindowsOS_Window : public Window {
+	class WindowsOSWindow : public Window {
 	public:
-		WindowsOS_Window(const WindowData& data);
-		~WindowsOS_Window();
+		WindowsOSWindow(const WindowData& data);
+		~WindowsOSWindow();
 		bool OnUpdate() override;
-		u32 GetWidth() const override { return m_data.width; }
-		u32 GetHeight() const override { return m_data.height; }
+		u32 getWidth() const override { return m_data.width; }
+		u32 getHeight() const override { return m_data.height; }
 		void* GetWindow() const override { return m_window; }
 	private:
 		GLFWwindow* m_window;

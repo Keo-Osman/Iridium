@@ -12,10 +12,10 @@ namespace Ird {
 		void Run();
 		void OnEvent(Event& ev);
 		//Return a pointer to m_window this will be of differnt type depending on platform / window library we use
-		void* GetNativeWindow();
+		void* getNativeWindow();
 		void AddLayer(Layer l);
 
-		static Application* Get() { return s_instance; }
+		static Application* get() { return s_instance; }
 	private:
 		Window* m_window;
 		bool m_running;

@@ -1,19 +1,22 @@
 #include "irpch.h"
-#include "WindowsOS_Window.h"
+#include "WindowsOSWindow.h"
 #include "Iridium/Event/Event.h"
 #include "Iridium/Core/Log.h"
+#include "Platform/GraphicsAPI/Vulkan/IrVulkan.h"
 
 namespace Ird {
 	
-	WindowsOS_Window::WindowsOS_Window(const WindowData& data)
+	WindowsOSWindow::WindowsOSWindow(const WindowData& data)
 		:m_data(data)
 	{
 		glfwInit();
+		glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
 		m_window = glfwCreateWindow(m_data.width, m_data.height, m_data.title.c_str(), nullptr, nullptr);
 		if(!m_window) {
 			// Handle window creation failure
 			glfwTerminate();
 		}
+		VulkanInit();
 
 		glfwSetWindowUserPointer(m_window, this);
 
@@ -92,16 +95,14 @@ namespace Ird {
 		glfwMakeContextCurrent(m_window);
 	}
 	
-	WindowsOS_Window::~WindowsOS_Window() {
+	WindowsOSWindow::~WindowsOSWindow() {
 		glfwDestroyWindow(m_window);
 		glfwTerminate(); 
 	}
 	
-	bool WindowsOS_Window::OnUpdate() {
+	bool WindowsOSWindow::OnUpdate() {
 		glfwPollEvents();
 		return !glfwWindowShouldClose(m_window);
 	}
-
-	
 		
 }

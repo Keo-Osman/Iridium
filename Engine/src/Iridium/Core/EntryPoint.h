@@ -6,7 +6,7 @@
 #include "spdlog/sinks/stdout_color_sinks.h"
 extern Ird::Application* Ird::CreateApp();
 int main() {
-	Ird::Log::Init();
+	Ird::log::Init();
 	Ird::Application* app = Ird::CreateApp();
 	if (!app) {
 		std::cout << "App failed to load!\n";
@@ -15,7 +15,7 @@ int main() {
 	app->Run();
 
 	delete app;
-	IRD_CORE_INFO("Count was: {}", Ird::TickCount);
+	IRD_CORE_INFO("Count was: {}", Ird::g_tickCount);
 	std::cin.get();
 
 

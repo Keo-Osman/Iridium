@@ -15,7 +15,7 @@ namespace Ird {
 	Application::~Application(){
 		delete m_window;
 	}
-	void* Application::GetNativeWindow(){
+	void* Application::getNativeWindow(){
 		return m_window->GetWindow();
 	}
 	void Application::AddLayer(Layer l) {
@@ -30,7 +30,7 @@ namespace Ird {
 	void Application::Run() {	
 		while (m_running) {
 			m_running = m_window->OnUpdate();
-			++TickCount;
+			++g_tickCount;
 			evQueue::Handle ev = evQueue::GetNextEvents();
 			for(int i = 0; i < ev.numOfEvents; i++){
 				OnEvent(evQueue::queue[ev.head]);

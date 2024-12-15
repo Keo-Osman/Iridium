@@ -57,6 +57,7 @@ project "glfw"
     filter "system:windows"
         systemversion "latest"
         staticruntime "On"
+        architecture "x86_64"
 
         files
         {
@@ -93,8 +94,10 @@ project "glfw"
 
 
 project "ImGui"
+    staticruntime "on"
     kind "StaticLib"
     language "C"
+    architecture "x86_64"
     location "%{prj.name}"
     targetdir ("%{wks.location}/bin/%{cfg.buildcfg}/%{cfg.architecture}__%{cfg.system}/%{prj.name}")
     objdir ("%{wks.location}/bin-int/%{cfg.buildcfg}/%{cfg.architecture}__%{cfg.system}/%{prj.name}")

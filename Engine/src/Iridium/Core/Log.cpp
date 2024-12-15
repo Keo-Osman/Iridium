@@ -1,18 +1,20 @@
 #include "irpch.h"
 #include "Log.h"
 namespace Ird {
-	//---------CORE LOGGER USED IN ENGINE-----------------------------------
-	Logger* g_coreLogger = nullptr;
+	namespace log{
+		//---------CORE LOGGER USED IN ENGINE-----------------------------------
+		Logger* g_coreLogger = nullptr;
 	//---------CORE LOGGER USED IN ENGINE-----------------------------------
 
 	//---------CLIENT LOGGER USED IN APPLICATIONS-----------------------------------
 	Logger* g_clientLogger = nullptr;
 	//---------CLIENT LOGGER USED IN APPLICATIONS-----------------------------------
-	void Log::Init() {
+	}
+	void log::Init() {
 		g_coreLogger = new Logger("Core");
 		g_clientLogger = new Logger("LOLOL");
 	}
-	void Log::Shutdown() {
+	void log::Shutdown() {
 		delete g_coreLogger;
 		delete g_clientLogger;
 	}

@@ -19,19 +19,19 @@
 #define IRD_CORE_CRITICAL(...)		
 #define IRD_CORE_INFO(...)			
 #else
-#define IRD_CORE_TRACE(...)			Ird::g_coreLogger->logger->trace(__VA_ARGS__)
-#define IRD_CORE_WARN(...)			Ird::g_coreLogger->logger->warn(__VA_ARGS__)
-#define IRD_CORE_ERROR(...)			Ird::g_coreLogger->logger->error(__VA_ARGS__)
-#define IRD_CORE_CRITICAL(...)		Ird::g_coreLogger->logger->critical(__VA_ARGS__)
-#define IRD_CORE_INFO(...)			Ird::g_coreLogger->logger->info(__VA_ARGS__)
+#define IRD_CORE_TRACE(...)			Ird::log::g_coreLogger->logger->trace(__VA_ARGS__)
+#define IRD_CORE_WARN(...)			Ird::log::g_coreLogger->logger->warn(__VA_ARGS__)
+#define IRD_CORE_ERROR(...)			Ird::log::g_coreLogger->logger->error(__VA_ARGS__)
+#define IRD_CORE_CRITICAL(...)		Ird::log::g_coreLogger->logger->critical(__VA_ARGS__)
+#define IRD_CORE_INFO(...)			Ird::log::g_coreLogger->logger->info(__VA_ARGS__)
 #endif
 
 #ifdef IRD_APP_LOG   
-#define IRD_TRACE(...)			Ird::g_clientLogger->logger->trace(__VA_ARGS__)
-#define IRD_WARN(...)			Ird::g_clientLogger->logger->warn(__VA_ARGS__)
-#define IRD_ERROR(...)			Ird::g_clientLogger->logger->error(__VA_ARGS__)
-#define IRD_CRITICAL(...)		Ird::g_clientLogger->logger->critical(__VA_ARGS__)
-#define IRD_INFO(...)			Ird::g_clientLogger->logger->info(__VA_ARGS__)
+#define IRD_TRACE(...)			Ird::log::g_clientLogger->logger->trace(__VA_ARGS__)
+#define IRD_WARN(...)			Ird::log::g_clientLogger->logger->warn(__VA_ARGS__)
+#define IRD_ERROR(...)			Ird::log::g_clientLogger->logger->error(__VA_ARGS__)
+#define IRD_CRITICAL(...)		Ird::log::g_clientLogger->logger->critical(__VA_ARGS__)
+#define IRD_INFO(...)			Ird::log::g_clientLogger->logger->info(__VA_ARGS__)
 #else
 #define IRD_TRACE(...)			
 #define IRD_WARN(...)			
@@ -54,10 +54,9 @@ namespace Ird {
 		}
 		
 	};
-	namespace Log {
+	namespace log {
 		void Init();
 		void Shutdown();
-	}
 	//---------CORE LOGGER USED IN ENGINE-----------------------------------
 	extern Logger* g_coreLogger;
 	//---------CORE LOGGER USED IN ENGINE-----------------------------------
@@ -65,6 +64,7 @@ namespace Ird {
 	//---------CLIENT LOGGER USED IN APPLICATIONS-----------------------------------
 	extern Logger* g_clientLogger;
 	//---------CLIENT LOGGER USED IN APPLICATIONS-----------------------------------
+	}
 
 	void Verify(bool condition);
 }

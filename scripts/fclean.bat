@@ -1,4 +1,4 @@
-@echo off
+REM @echo off
 setlocal enabledelayedexpansion
 
 set "extensions=.sln .vcxproj .vcxproj.filters .vcxproj.user .csproj .ninja .ninja_deps .ninja_log .cmake"
